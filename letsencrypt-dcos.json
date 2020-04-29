@@ -1,0 +1,37 @@
+{
+  "id": "/letsencrypt-dcos",
+  "cpus": 0.5,
+  "mem": 512,
+  "instances": 1,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "forcePullImage": true,
+      "image": "jokyuseok81/myletsencrypt",
+      "network": "BRIDGE",
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "servicePort": 10000,
+          "protocol": "tcp"
+        }
+      ]
+    }
+  },
+  "env": {
+    "MARATHON_LB_ID": "marathon-lb",
+    "MARATHON_URL": "http://marathon.mesos:8080",
+    "LETSENCRYPT_EMAIL": "cyberx0911@gmail.com",
+    "LETSENCRYPT_SERVER_URL": "https://acme-staging-v02.api.letsencrypt.org/directory"
+  },
+  "labels": {
+    "HAPROXY_0_VHOST": "cyber-i.com,www.cyber-i.com,solution.cyber-i.com,support.cyber-i.com,intra.cyber-i.com,sim.cyber-i.com,git.cyber-i.com,cms.cyber-i.com,api.cyber-i.com,docker.cyber-i.com,demo-api.cyber-i.com",
+    "HAPROXY_GROUP": "external",
+    "HAPROXY_0_PATH": "/.well-known/acme-challenge"
+  },
+  "backoffSeconds": 5,
+  "upgradeStrategy": {
+    "minimumHealthCapacity": 0.5,
+    "maximumOverCapacity": 0
+  }
+}
