@@ -6,7 +6,7 @@
   "container": {
     "type": "DOCKER",
     "docker": {
-      "forcePullImage": true,
+      "forcePullImage": false,
       "image": "jokyuseok81/myletsencrypt",
       "network": "BRIDGE",
       "portMappings": [
